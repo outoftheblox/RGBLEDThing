@@ -36,7 +36,9 @@ void setup()
     Serial.println(msg);
   });
 
-  thing.addActuator(String("actuator/rbgled/") + thing.clientId(), [](Value& value){
+  thing.begin();
+
+  thing.addActuator(thing.clientId() + "/rgbled/color", [](Value& value){
     state = (bool)value;
     StaticJsonBuffer<BUFFER_SIZE> jsonBuffer;
     String msg = value;
@@ -56,10 +58,9 @@ void setup()
     pixels.setPixelColor(0, pixels.Color(r, g, b));
     pixels.show();
     Serial.println("Got:" + String(value));
-    thing.publish(String("sensor/rbgled/") + thing.clientId(), value);
+    //thing.publish(thing.clientId() + "/rbgled/color", value);
   });
 
-  thing.begin();
   led.setPattern(normal);
 }
 
