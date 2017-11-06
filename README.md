@@ -1,2 +1,2 @@
-# RelayThing
-A relay thing for switching electric devices on and off.
+# RGBLedThing
+A RGB Led thing for the SM5050 LED.
