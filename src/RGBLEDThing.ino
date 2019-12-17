@@ -38,15 +38,15 @@ void setup()
 
     thing.begin();
 
-    thing.addActuator("rgbled/color/" + thing.clientId(), [](Value& value){
+    thing.addActuator(thing.clientId() + "/rgbled/color", [](Value& value){
         state = (bool)value;
         StaticJsonBuffer<BUFFER_SIZE> jsonBuffer;
         String msg = value;
         JsonObject& root = jsonBuffer.parseObject(msg);
 
         if (!root.success()) {
-        Serial.println("parseObject() failed");
-        return false;
+            Serial.println("parseObject() failed");
+            return false;
         }
 
         int r = root["r"];
